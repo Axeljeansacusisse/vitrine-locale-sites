@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boucherie Martin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700&display=swap">
+<style>
+/* Layout : bandeau carrelage blanc, blocs rouge sang de bœuf, ardoise noire pour les prix */
+:root{
+  --tile:#f7f6f4; --line:#e3dfdb; --ink:#1b1716; --muted:#5f5753;
+  --ox:#7a1420; --ox-2:#5c0e18; --slate:#232323; --chalk:#f2efe9; --gold:#c9a24a;
+  --display:"Archivo Black","Arial Black",Impact,sans-serif;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--tile);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:var(--slate);color:var(--chalk);font-size:12px;text-align:center;padding-block:6px;letter-spacing:.04em}
+header{background:var(--tile);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-size:22px;letter-spacing:.02em;color:var(--ox);text-transform:uppercase;line-height:1}
+.logo small{display:block;font-family:var(--body);font-size:11px;color:var(--muted);letter-spacing:.18em;margin-top:4px}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:15px}
+nav a:hover,nav a:focus-visible{color:var(--ox)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ox);color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:4px;border:0;font:inherit;font-weight:700;cursor:pointer}
+.btn:hover,.btn:focus-visible{background:var(--ox-2)}
+.btn.ghost{background:transparent;color:var(--chalk);border:1px solid rgba(255,255,255,.5)}
+.hero{background:var(--ox);color:#fff;background-image:linear-gradient(135deg,rgba(0,0,0,.0),rgba(0,0,0,.25))}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;padding-block:64px;align-items:center}
+.hero h1{font-family:var(--display);font-size:clamp(36px,6vw,64px);line-height:1;margin:0 0 18px;text-transform:uppercase;text-wrap:balance}
+.hero p{font-size:18px;max-width:46ch;margin:0 0 24px;color:#f3dcdc}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.stamp{justify-self:center;width:min(280px,100%);aspect-ratio:1;border:3px solid var(--gold);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--gold);padding:24px}
+.stamp b{font-family:var(--display);font-size:44px;display:block;line-height:1}
+.stamp span{font-size:13px;letter-spacing:.2em;text-transform:uppercase}
+section{padding-block:56px}
+h2{font-family:var(--display);text-transform:uppercase;font-size:clamp(26px,4vw,36px);margin:0 0 8px;color:var(--ox);text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.board{background:var(--slate);color:var(--chalk);border-radius:6px;padding:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 40px}
+.board h3{grid-column:1/-1;font-family:var(--display);font-size:20px;margin:0 0 12px;color:var(--gold);text-transform:uppercase;letter-spacing:.04em}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-block:10px;border-bottom:1px dashed rgba(242,239,233,.25)}
+.row span:first-child{min-width:0}
+.row em{font-style:normal;font-size:13px;color:#bdb6ad;display:block}
+.price{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:22px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted)}
+.card .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ox);margin-bottom:10px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+td{padding:9px 0;border-bottom:1px solid var(--line)}
+td:last-child{text-align:right;font-weight:500}
+tr.today td{color:var(--ox);font-weight:700}
+.map{background:repeating-linear-gradient(0deg,#ece8e3 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,#ece8e3 0 1px,transparent 1px 28px),#f9f8f6;border:1px solid var(--line);border-radius:6px;min-height:220px;display:grid;place-items:center;text-align:center;padding:20px}
+.pin{width:18px;height:18px;background:var(--ox);border-radius:50% 50% 50% 0;transform:rotate(-45deg);margin:0 auto 10px}
+form{display:grid;gap:12px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:24px}
+label{font-weight:500;font-size:14px;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid #cfc9c3;border-radius:4px;background:#fff;color:var(--ink)}
+input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible,.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.ok{background:#e9f3ea;color:#1f5b2a;padding:12px;border-radius:4px}
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+blockquote{margin:0;background:#fff;border:1px solid var(--line);border-radius:6px;padding:20px}
+blockquote .stars{color:var(--gold);letter-spacing:2px}
+blockquote footer{margin-top:10px;color:var(--muted);font-size:14px}
+.callbar{position:fixed;left:0;right:0;bottom:0;display:none;background:var(--ox);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));z-index:5}
+.callbar a{display:block;text-align:center;color:#fff;font-weight:700;text-decoration:none}
+.site-footer{background:var(--slate);color:#bdb6ad;font-size:14px}
+.site-footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:760px){
+  .hero .wrap,.info{grid-template-columns:1fr}
+  .stamp{display:none}
+  .board{grid-template-columns:1fr}
+  .cards,.reviews{grid-template-columns:1fr}
+  nav{display:none}
+  .callbar{display:block}
+  body{padding-bottom:56px}
+}
+</style>
+</head>
+<body>
+
+<div class="demo">Site de démonstration réalisé par Vitrine Locale · commerce fictif</div>
+<header>
+  <div class="wrap">
+    <div class="logo">Boucherie Martin<small>Artisan boucher depuis 1987</small></div>
+    <nav aria-label="Navigation principale">
+      <a href="#ardoise">L'ardoise</a><a href="#maison">La maison</a><a href="#horaires">Horaires</a><a href="#commande">Commander</a>
+    </nav>
+    <a class="btn" href="#commande">Commander pour samedi</a>
+  </div>
+</header>
+
+<section class="hero" style="padding-block:0">
+  <div class="wrap">
+    <div>
+      <h1>La viande d'ici, coupée devant vous</h1>
+      <p>Bœuf charolais de l'Allier, agneau du Bourbonnais et volailles fermières. Commandez la veille, on prépare, vous passez récupérer.</p>
+      <div class="ctas">
+        <a class="btn" style="background:#fff;color:var(--ox)" href="#commande">Passer une commande</a>
+        <a class="btn ghost" href="#horaires">Voir les horaires</a>
+      </div>
+    </div>
+    <div class="stamp"><div><span>Label</span><b>Rouge</b><span>Charolais · Allier</span></div></div>
+  </div>
+</section>
+
+<section id="ardoise">
+  <div class="wrap">
+    <h2>L'ardoise de la semaine</h2>
+    <p class="lead">Les prix changent selon les arrivages. Tout est découpé à la demande, au gramme près.</p>
+    <div class="board">
+      <h3>Semaine du 23 novembre</h3>
+      <div class="row"><span>Entrecôte charolaise<em>maturée 21 jours</em></span><span class="price">38,90 €/kg</span></div>
+      <div class="row"><span>Bavette d'aloyau<em>idéale à la plancha</em></span><span class="price">26,50 €/kg</span></div>
+      <div class="row"><span>Gigot d'agneau<em>raccourci, avec os</em></span><span class="price">24,90 €/kg</span></div>
+      <div class="row"><span>Poulet fermier jaune<em>Label Rouge, env. 1,8 kg</em></span><span class="price">11,80 €/kg</span></div>
+      <div class="row"><span>Saucisses de Toulouse maison<em>pur porc, sans conservateur</em></span><span class="price">14,50 €/kg</span></div>
+      <div class="row"><span>Blanquette de veau<em>épaule et tendron</em></span><span class="price">21,90 €/kg</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="maison" style="background:#fff;border-block:1px solid var(--line)">
+  <div class="wrap">
+    <h2>La maison</h2>
+    <p class="lead">Trois générations derrière le même comptoir. On connaît chaque éleveur par son prénom.</p>
+    <div class="cards">
+      <div class="card"><span class="tag">Origine</span><h3>Élevages à moins de 80 km</h3><p>Nos bêtes viennent de quatre fermes partenaires que nous visitons chaque saison.</p></div>
+      <div class="card"><span class="tag">Savoir-faire</span><h3>Maturation en cave</h3><p>Les pièces de bœuf reposent 21 à 35 jours pour gagner en tendreté et en goût.</p></div>
+      <div class="card"><span class="tag">Traiteur</span><h3>Plats du jour à emporter</h3><p>Du mardi au samedi midi : bœuf bourguignon, parmentier, quiches, terrines maison.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="horaires">
+  <div class="wrap info">
+    <div>
+      <h2>Horaires</h2>
+      <table aria-label="Horaires d'ouverture">
+        <tbody id="hours">
+          <tr data-d="1"><td>Lundi</td><td>Fermé</td></tr>
+          <tr data-d="2"><td>Mardi</td><td>8h – 12h30 · 15h – 19h</td></tr>
+          <tr data-d="3"><td>Mercredi</td><td>8h – 12h30 · 15h – 19h</td></tr>
+          <tr data-d="4"><td>Jeudi</td><td>8h – 12h30 · 15h – 19h</td></tr>
+          <tr data-d="5"><td>Vendredi</td><td>8h – 19h</td></tr>
+          <tr data-d="6"><td>Samedi</td><td>7h30 – 18h</td></tr>
+          <tr data-d="0"><td>Dimanche</td><td>8h – 12h30</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2>Nous trouver</h2>
+      <div class="map"><div><div class="pin"></div><strong>12 rue des Halles, 03000 Moulins</strong><br><span style="color:var(--muted)">Parking gratuit place d'Allier · Tél. 04 70 00 00 00</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-block:1px solid var(--line)">
+  <div class="wrap">
+    <h2>Ils en parlent</h2>
+    <p class="lead">Note moyenne de 4,9 sur 5 sur Google, 212 avis.</p>
+    <div class="reviews">
+      <blockquote><div class="stars">★★★★★</div>« La meilleure entrecôte du coin, et toujours de bons conseils pour la cuisson. »<footer>Sophie R.</footer></blockquote>
+      <blockquote><div class="stars">★★★★★</div>« J'ai commandé mon rôti la veille, il était ficelé et prêt à 9h. Parfait. »<footer>Karim B.</footer></blockquote>
+      <blockquote><div class="stars">★★★★★</div>« Les saucisses maison sont une tuerie. Accueil toujours souriant. »<footer>Jeanne L.</footer></blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="commande">
+  <div class="wrap info">
+    <div>
+      <h2>Commander en ligne</h2>
+      <p class="lead">Envoyez votre commande avant 18h, elle est prête le lendemain dès l'ouverture. Paiement au retrait.</p>
+      <p style="margin:0;color:var(--muted)">Pour les fêtes, pensez à réserver vos chapons et rôtis avant le 18 décembre.</p>
+    </div>
+    <form id="f">
+      <label for="nom">Nom<input id="nom" required placeholder="Votre nom"></label>
+      <label for="tel">Téléphone<input id="tel" type="tel" required placeholder="06 ..."></label>
+      <label for="jour">Retrait le<select id="jour"><option>Demain matin</option><option>Demain après-midi</option><option>Samedi</option></select></label>
+      <label for="cmd">Votre commande<textarea id="cmd" rows="3" placeholder="Ex. 4 entrecôtes de 300 g, 1 kg de saucisses"></textarea></label>
+      <button class="btn" type="submit">Envoyer la commande</button>
+      <div id="ok" class="ok" hidden>Merci ! Dans le vrai site, la boucherie reçoit votre commande par SMS ou e-mail.</div>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="wrap"><span>© Boucherie Martin · 12 rue des Halles, Moulins</span><span>Site réalisé par Vitrine Locale</span></div></footer>
+<div class="callbar"><a href="#commande">Commander ou appeler : 04 70 00 00 00</a></div>
+
+<script>
+try{var d=new Date().getDay();var r=document.querySelector('#hours tr[data-d="'+d+'"]');if(r)r.className='today';}catch(e){}
+document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();document.getElementById('ok').hidden=false;});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vitrine Locale</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout : une offre unique, lisible au comptoir sur un téléphone ; bleu enseigne + jaune ticket */
+:root{
+  --bg:#f5f7fb; --surface:#ffffff; --fg:#14213d; --muted:#55617a; --line:#dde3ee;
+  --accent:#1d4ed8; --accent-fg:#ffffff; --ticket:#ffd166; --ok:#15803d;
+  --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1424; --surface:#161e33; --fg:#e8edf7; --muted:#9aa6bf; --line:#27324d;
+  --accent:#6b93ff; --accent-fg:#0e1424; --ticket:#ffd166; --ok:#4ade80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1424; --surface:#161e33; --fg:#e8edf7; --muted:#9aa6bf; --line:#27324d;
+  --accent:#6b93ff; --accent-fg:#0e1424; --ticket:#ffd166; --ok:#4ade80; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:20px;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:22px}
+.brand i{font-style:normal;color:var(--accent)}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:600;padding:12px 20px;border-radius:8px}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--ticket);outline-offset:2px}
+.hero{padding-block:32px 48px}
+h1{font-family:var(--display);font-size:clamp(34px,5.6vw,56px);line-height:1.05;margin:0 0 16px;letter-spacing:-.02em;text-wrap:balance;max-width:18ch}
+.hero p{font-size:19px;color:var(--muted);max-width:52ch;margin:0 0 24px}
+section{padding-block:44px}
+h2{font-family:var(--display);font-size:clamp(26px,3.6vw,34px);margin:0 0 8px;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 24px;max-width:60ch}
+.demos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;text-decoration:none;color:var(--fg);display:grid;gap:6px}
+.demo b{font-family:var(--display);font-size:19px}
+.demo span{color:var(--muted);font-size:14px}
+.demo em{font-style:normal;color:var(--accent);font-weight:600;font-size:14px}
+.demo:hover{border-color:var(--accent)}
+.price{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px}
+.amount{font-family:var(--display);font-size:64px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.amount small{font-size:20px;color:var(--muted);font-weight:500}
+.stub{display:inline-block;background:var(--ticket);color:#14213d;font-weight:600;font-size:13px;padding:4px 10px;border-radius:4px;margin:12px 0 16px}
+ul.check{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul.check li{display:grid;grid-template-columns:22px 1fr;gap:8px}
+ul.check li::before{content:"✓";color:var(--ok);font-weight:700}
+.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+.term{border-top:2px solid var(--accent);padding-top:12px}
+.term b{display:block;font-family:var(--display);font-size:17px;margin-bottom:4px}
+.term p{margin:0;color:var(--muted);font-size:15px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.steps div{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.steps div::before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-fg);font-weight:700;margin-bottom:8px}
+.steps b{display:block;margin-bottom:4px}
+.steps p{margin:0;color:var(--muted);font-size:15px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+details+details{margin-top:10px}
+summary{font-weight:600;cursor:pointer}
+details p{color:var(--muted);margin:10px 0 0}
+.contact{background:var(--accent);color:var(--accent-fg);border-radius:16px;padding:32px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.contact h2{margin:0}
+.contact .num{font-family:var(--display);font-size:24px;font-weight:700;user-select:all}
+footer{color:var(--muted);font-size:14px;padding-block:28px}
+@media (max-width:820px){.demos,.terms{grid-template-columns:1fr}.price{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><div class="brand">Vitrine <i>Locale</i></div><a class="btn" href="#contact">Être rappelé</a></div></header>
+
+<div class="wrap">
+<section class="hero">
+  <h1>Le site de votre commerce, en ligne en 7 jours</h1>
+  <p>On crée votre site, on l'héberge et on s'en occupe chaque mois. Vous gardez votre temps pour vos clients au comptoir.</p>
+  <a class="btn" href="#tarif">Voir le tarif</a>
+</section>
+
+<section>
+  <h2>Ce que ça donne</h2>
+  <p class="lead">Trois exemples réalisés pour des commerces de proximité. Ouvrez-les sur votre téléphone : c'est là que vos clients vous cherchent.</p>
+  <div class="demos">
+    <a class="demo" href="/demos/boucherie/"><b>Boucherie</b><span>Ardoise de la semaine, commande la veille</span><em>Voir l'exemple</em></a>
+    <a class="demo" href="/demos/epicerie/"><b>Épicerie</b><span>Rayons, panier de la semaine, horaires</span><em>Voir l'exemple</em></a>
+    <a class="demo" href="/demos/boulangerie/"><b>Boulangerie</b><span>Fournées du jour, réservation en ligne</span><em>Voir l'exemple</em></a>
+  </div>
+</section>
+
+<section id="tarif">
+  <h2>Un seul tarif, tout compris</h2>
+  <p class="lead">Pas de devis compliqué. Pas de frais cachés.</p>
+  <div class="price">
+    <div>
+      <div class="amount">49 €<small> / mois</small></div>
+      <div class="stub">Création du site offerte</div>
+      <p style="margin:0;color:var(--muted)">Engagement 12 mois, prélèvement automatique en début de mois. Ensuite, le contrat continue de mois en mois et vous pouvez arrêter quand vous voulez avec un mois de préavis.</p>
+    </div>
+    <ul class="check">
+      <li>Création de votre site sur mesure (jusqu'à 5 pages)</li>
+      <li>Nom de domaine (votre-commerce.fr) inclus</li>
+      <li>Hébergement rapide et sécurisé (HTTPS)</li>
+      <li>Modifications illimitées des horaires, prix et promos</li>
+      <li>Mise à jour de votre fiche Google</li>
+      <li>Formulaire de commande ou réservation</li>
+      <li>Support par téléphone et WhatsApp, réponse sous 24 h ouvrées</li>
+    </ul>
+  </div>
+  <div class="terms">
+    <div class="term"><b>30 jours pour changer d'avis</b><p>Pas satisfait le premier mois ? On arrête et on vous rembourse ce mois. Sans justification.</p></div>
+    <div class="term"><b>12 mois d'engagement</b><p>C'est ce qui nous permet d'offrir la création du site.</p></div>
+    <div class="term"><b>Votre site vous appartient</b><p>Si vous partez après 12 mois, on vous transfère le nom de domaine.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Comment ça se passe</h2>
+  <p class="lead">Vous n'avez rien de technique à faire.</p>
+  <div class="steps">
+    <div><b>On se voit 20 minutes</b><p>Vos produits, vos horaires, vos photos.</p></div>
+    <div><b>On crée le site</b><p>Vous recevez une première version sous 5 jours.</p></div>
+    <div><b>Vous validez</b><p>On ajuste ce que vous voulez, puis on met en ligne.</p></div>
+    <div><b>On s'en occupe</b><p>Un message suffit pour changer un prix ou un horaire.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Questions fréquentes</h2>
+  <details><summary>J'ai déjà une page Facebook, pourquoi un site ?</summary><p>Vos clients vous cherchent sur Google. Un site avec vos horaires et votre adresse vous fait apparaître et inspire confiance, même chez ceux qui n'ont pas Facebook.</p></details>
+  <details><summary>Et si je veux arrêter après un an ?</summary><p>Vous arrêtez avec un mois de préavis. On vous transfère le nom de domaine si vous le souhaitez.</p></details>
+  <details><summary>Je ne suis pas à l'aise avec l'informatique.</summary><p>Vous n'avez rien à toucher. Vous nous envoyez un SMS ou un message WhatsApp, on fait la modification.</p></details>
+  <details><summary>Je peux vendre en ligne ?</summary><p>Oui, en option : commande avec paiement en ligne et retrait en boutique. On en parle ensemble.</p></details>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <div><h2>On en parle ?</h2><p style="margin:6px 0 0">Appelez ou envoyez un message, on vous rappelle dans la journée.</p></div>
+    <div class="num">06 XX XX XX XX</div>
+  </div>
+</section>
+</div>
+<footer><div class="wrap">Vitrine Locale · Entrepreneur individuel · SIRET à compléter · TVA non applicable, art. 293 B du CGI</div></footer>
+
+</body>
+</html>

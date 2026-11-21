@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boulangerie Lefèvre</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;600;700&display=swap">
+<style>
+/* Layout : fournil sombre en tête, fiches pain sur fond farine, horloge des fournées */
+:root{
+  --flour:#faf7f0; --crust:#8a4b1c; --crust-2:#6b3612; --oven:#211a15; --ink:#2a211b; --muted:#6c6158;
+  --wheat:#e9c46a; --line:#e6ddd0;
+  --display:"Young Serif",Georgia,"Times New Roman",serif;
+  --body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--flour);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:#000;color:#d8cfc4;font-size:12px;text-align:center;padding-block:6px}
+.top{background:var(--oven);color:#f3ebe0}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-size:26px;color:var(--wheat);line-height:1}
+.logo small{display:block;font-family:var(--body);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#bfae9c;margin-top:6px}
+.top nav{display:flex;gap:18px;flex-wrap:wrap}
+.top nav a{color:#f3ebe0;text-decoration:none;font-weight:600;font-size:15px}
+.top nav a:hover{color:var(--wheat)}
+.hero{background:var(--oven);color:#f3ebe0;background-image:radial-gradient(ellipse at 80% 120%,rgba(233,196,106,.28),transparent 60%)}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;padding-block:40px 64px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,6vw,64px);line-height:1.05;margin:0 0 18px;text-wrap:balance}
+.hero p{font-size:18px;color:#d8cbbb;max-width:44ch;margin:0 0 24px}
+.btn{display:inline-block;background:var(--wheat);color:var(--oven);text-decoration:none;font-weight:700;padding:13px 20px;border-radius:6px;border:0;font:inherit;font-weight:700;cursor:pointer}
+.btn:hover{background:#f1d48a}
+.btn.dark{background:var(--crust);color:#fff}
+.btn.dark:hover{background:var(--crust-2)}
+.fournees{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:22px}
+.fournees h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 12px;color:var(--wheat)}
+.f{display:flex;justify-content:space-between;gap:12px;padding-block:9px;border-bottom:1px solid rgba(255,255,255,.1);font-variant-numeric:tabular-nums}
+.f:last-child{border-bottom:0}
+.f.next{color:var(--wheat);font-weight:700}
+section{padding-block:56px}
+h2.t{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,40px);margin:0 0 8px;color:var(--crust-2)}
+.lead{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.breads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.bread{border-top:2px solid var(--crust);padding-top:16px}
+.bread .shape{height:70px;margin-bottom:14px}
+.bread h3{font-family:var(--display);font-weight:400;font-size:21px;margin:0 0 4px}
+.bread p{margin:0 0 8px;color:var(--muted)}
+.bread .meta{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;font-weight:600}
+.special{background:#fff;border-block:1px solid var(--line)}
+.special .wrap{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.tag{display:inline-block;background:var(--wheat);color:var(--oven);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+td{padding:9px 0;border-bottom:1px solid var(--line)}
+td:last-child{text-align:right}
+tr.today td{color:var(--crust);font-weight:700}
+form{display:grid;gap:12px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px}
+label{display:grid;gap:6px;font-weight:600;font-size:14px}
+input,select{font:inherit;padding:10px 12px;border:1px solid #d6cbbd;border-radius:6px;background:#fff;color:var(--ink)}
+.ok{background:#f3ecd9;color:var(--crust-2);padding:12px;border-radius:6px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--wheat);outline-offset:2px}
+.site-footer{background:var(--oven);color:#bfae9c;font-size:14px}
+.site-footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:26px}
+@media (max-width:800px){
+  .hero .wrap,.special .wrap,.two{grid-template-columns:1fr}
+  .breads{grid-template-columns:1fr}
+  .top nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="demo">Site de démonstration réalisé par Vitrine Locale · commerce fictif</div>
+<div class="top"><div class="wrap">
+  <div class="logo">Lefèvre<small>Boulangerie · Pâtisserie</small></div>
+  <nav aria-label="Navigation principale"><a href="#pains">Nos pains</a><a href="#galette">Le moment</a><a href="#horaires">Horaires</a><a href="#reserver">Réserver</a></nav>
+</div></div>
+
+<section class="hero" style="padding-block:0"><div class="wrap">
+  <div>
+    <h1>Levain naturel, farines du Vexin, four allumé à 4h</h1>
+    <p>Pains au levain, viennoiseries pur beurre et pâtisseries du jour. Réservez votre baguette ou votre gâteau, il vous attend au comptoir.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#reserver">Réserver en ligne</a><a class="btn dark" href="#horaires">Horaires</a></div>
+  </div>
+  <div class="fournees" aria-label="Heures des fournées">
+    <h2>Fournées du jour</h2>
+    <div id="fx"></div>
+  </div>
+</div></section>
+
+<section id="pains"><div class="wrap">
+  <h2 class="t">Nos pains</h2>
+  <p class="lead">Tous nos pains sont pétris sur place, avec un levain entretenu depuis 2009.</p>
+  <div class="breads">
+    <div class="bread">
+      <svg class="shape" viewBox="0 0 200 70" aria-hidden="true"><ellipse cx="100" cy="40" rx="96" ry="22" fill="#b7742f"/><path d="M40 34 l20 -8 M80 30 l20 -8 M120 30 l20 -8" stroke="#f1d48a" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+      <h3>Baguette de tradition</h3><p>Fermentation lente de 18 heures.</p><div class="meta"><span>250 g</span><span>1,30 €</span></div>
+    </div>
+    <div class="bread">
+      <svg class="shape" viewBox="0 0 200 70" aria-hidden="true"><path d="M30 60 Q100 -10 170 60 Z" fill="#8a4b1c"/><path d="M70 40 l60 0" stroke="#e9c46a" stroke-width="4" stroke-linecap="round"/></svg>
+      <h3>Grosse miche au levain</h3><p>Seigle et blé, croûte épaisse, se garde 5 jours.</p><div class="meta"><span>1 kg</span><span>7,80 €</span></div>
+    </div>
+    <div class="bread">
+      <svg class="shape" viewBox="0 0 200 70" aria-hidden="true"><path d="M50 62 C50 20 150 20 150 62 Z" fill="#d79a4a"/><path d="M68 50 C80 30 120 30 132 50" stroke="#8a4b1c" stroke-width="4" fill="none"/></svg>
+      <h3>Croissant pur beurre</h3><p>Beurre AOP Charentes-Poitou, feuilletage maison.</p><div class="meta"><span>la pièce</span><span>1,40 €</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="special" id="galette"><div class="wrap">
+  <div>
+    <span class="tag">Du 2 au 31 janvier</span>
+    <h2 class="t">La galette frangipane</h2>
+    <p class="lead" style="margin-bottom:18px">Crème d'amande maison, feuilletage inversé, fève en porcelaine. 4, 6 ou 8 parts, à réserver la veille.</p>
+    <a class="btn dark" href="#reserver">Réserver une galette</a>
+  </div>
+  <svg viewBox="0 0 300 200" role="img" aria-label="Illustration d'une galette des rois"><ellipse cx="150" cy="110" rx="130" ry="70" fill="#c98a3c"/><ellipse cx="150" cy="100" rx="122" ry="62" fill="#e0a64f"/><g stroke="#a8692a" stroke-width="3" fill="none"><path d="M60 100 Q150 30 240 100"/><path d="M75 120 Q150 50 225 120"/><path d="M95 140 Q150 80 205 140"/></g></svg>
+</div></section>
+
+<section id="horaires"><div class="wrap two">
+  <div>
+    <h2 class="t">Horaires</h2>
+    <table aria-label="Horaires d'ouverture"><tbody id="hours">
+      <tr data-d="1"><td>Lundi</td><td>6h30 – 19h30</td></tr>
+      <tr data-d="2"><td>Mardi</td><td>Fermé</td></tr>
+      <tr data-d="3"><td>Mercredi</td><td>6h30 – 19h30</td></tr>
+      <tr data-d="4"><td>Jeudi</td><td>6h30 – 19h30</td></tr>
+      <tr data-d="5"><td>Vendredi</td><td>6h30 – 19h30</td></tr>
+      <tr data-d="6"><td>Samedi</td><td>6h30 – 19h30</td></tr>
+      <tr data-d="0"><td>Dimanche</td><td>7h – 13h</td></tr>
+    </tbody></table>
+    <p style="color:var(--muted)">3 Grande Rue, 95300 Pontoise · Tél. 01 30 00 00 00</p>
+  </div>
+  <div id="reserver">
+    <h2 class="t">Réserver</h2>
+    <form id="f">
+      <label for="n">Nom<input id="n" required placeholder="Votre nom"></label>
+      <label for="p">Produit<select id="p"><option>Baguettes de tradition</option><option>Grosse miche au levain</option><option>Galette frangipane 6 parts</option><option>Gâteau d'anniversaire (on vous rappelle)</option></select></label>
+      <label for="q">Quantité<input id="q" type="number" min="1" value="2"></label>
+      <label for="h">Retrait<select id="h"><option>Demain 7h – 9h</option><option>Demain 11h – 13h</option><option>Demain 17h – 19h</option></select></label>
+      <button class="btn dark" type="submit">Réserver</button>
+      <div class="ok" id="ok" hidden>C'est noté ! Dans le vrai site, la boulangerie reçoit la réservation par SMS.</div>
+    </form>
+  </div>
+</div></section>
+
+<footer class="site-footer"><div class="wrap"><span>© Boulangerie Lefèvre · Pontoise</span><span>Site réalisé par Vitrine Locale</span></div></footer>
+
+<script>
+(function(){
+  var batches=[["6h30","Baguettes, croissants"],["8h00","Pains spéciaux"],["11h30","Baguettes, sandwichs"],["16h30","Baguettes, viennoiseries"],["18h00","Dernière tradition"]];
+  var now=new Date(),m=now.getHours()*60+now.getMinutes(),done=false,fx=document.getElementById('fx');
+  batches.forEach(function(b){var p=b[0].split('h'),t=+p[0]*60+ +p[1];var el=document.createElement('div');el.className='f';
+    if(!done&&t>=m){el.className+=' next';done=true;}
+    el.innerHTML='<span>'+b[1]+'</span><span>'+b[0]+'</span>';fx.appendChild(el);});
+  var r=document.querySelector('#hours tr[data-d="'+now.getDay()+'"]');if(r)r.className='today';
+  document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();document.getElementById('ok').hidden=false;});
+})();
+</script>
+
+</body>
+</html>
